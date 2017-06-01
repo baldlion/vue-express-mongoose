@@ -1,0 +1,51 @@
+.form {
+  $form: &;
+
+  &__errors {
+    color: red;
+  }
+
+
+  &__row {
+    width: 100%;
+
+    & + & {
+      margin-top: 1rem;
+    }
+  }
+
+  &__label {
+    display: inline-flex;
+    flex-direction: column;
+
+    & #{$form}__control {
+      margin: 0.3rem 0 0 0;
+    }
+
+    &--inline {
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      & #{$form}__control {
+        margin: 0 0 0 1rem;
+      }
+    }
+  }
+
+}
+
+input[type="text"],
+input[type="password"] {
+  min-width: 180px;
+  border: 1px solid #e0e0e0;
+  padding: 0.3rem 0.6rem;
+}
+
+button {
+  border: 1px solid #e0e0e0;
+  background: white;
+  padding: 0.3rem 0.6rem;
+}
+

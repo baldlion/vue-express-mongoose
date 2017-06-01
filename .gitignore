@@ -1,0 +1,7 @@
+node_modules
+.idea/
+nodemon.json
+.env
+dist/
+.DS_Store
+db/
