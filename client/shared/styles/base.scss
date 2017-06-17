@@ -1,0 +1,14 @@
+@import "~normalize-scss";
+@import "variables";
+@import "fonts";
+
+@include normalize();
+
+body {
+  color: black;
+  font-feature-settings: "kern" 1, "dlig" 1;
+}
+
+a {
+  text-decoration: none;
+}

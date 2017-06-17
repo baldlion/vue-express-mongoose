@@ -1,7 +1,5 @@
-const nodeExternals = require('webpack-node-externals');
-const fs = require('fs');
-const path = require('path');
-const env = process.env.NODE_ENV || 'development';
+const nodeExternals = require('webpack-node-externals')
+const path = require('path')
 
 module.exports = {
   target: 'node',
@@ -16,9 +14,8 @@ module.exports = {
   resolve: {
     modules: [
       path.join(__dirname, '..', 'client', 'app'),
-      path.join(__dirname, '..', 'client', 'auth'),
       path.join(__dirname, '..', 'client', 'admin'),
-      path.join(__dirname, '..', 'node_modules'),
+      path.join(__dirname, '..', 'node_modules')
     ],
     extensions: [ '.js', '.json' ],
     alias: {
@@ -33,7 +30,7 @@ module.exports = {
         query: {
           presets: [ 'es2015', 'stage-2' ]
         }
-      },
+      }
     ]
-  },
-};
+  }
+}

@@ -1,7 +1,7 @@
 <template>
-  <article class="dashboard">
-    Home
-  </article>
+  <div class="home">
+    <h1>Welcome</h1>
+  </div>
 </template>
 
 <script>
@@ -22,5 +22,9 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .home {
+    padding: 4rem;
+  }
 
 </style>

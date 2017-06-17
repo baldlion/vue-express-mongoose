@@ -1,7 +1,9 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-Vue.use(Router);
+const Dashboard = resolve => require(['../components/Dashboard.vue'], resolve)
+
+Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -10,7 +12,7 @@ export default new Router({
     {
       path: '/',
       name: 'Dashboard',
-      component: resolve => require(['../components/Dashboard.vue'], resolve)
+      component: Dashboard
     }
   ]
-});
+})

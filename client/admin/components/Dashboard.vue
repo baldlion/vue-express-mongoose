@@ -1,17 +1,17 @@
 <template>
-  <div>
-    dashboard
-  </div>
+  <article class="dashboard">
+    Dashboard
+  </article>
 </template>
 
 <script>
 
   export default {
-    mounted() {
+    mounted () {
 
     },
 
-    data() {
+    data () {
       return {
 
       }

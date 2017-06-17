@@ -1,7 +1,7 @@
 <template>
-  <article class="dashboard">
-    Home
-  </article>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -21,6 +21,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  @import "~shared/styles/base";
 
 </style>

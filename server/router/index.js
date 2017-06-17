@@ -1,20 +1,16 @@
-import express from 'express';
+import express from 'express'
 
-import adminRouter from './admin-router';
-import apiRouter from './api-router';
-import authRouter from './auth-router';
+import adminRouter from './admin.router'
+import apiRouter from './api.router'
 
-const router = express.Router();
+const router = express.Router()
 
 router.get('*', (req, res) => {
-  res.render('app', { layout: false });
-});
+  res.render('app', { layout: false })
+})
 
-export default function (app) {
-
-  app.use('/admin', adminRouter);
-  app.use('/auth', authRouter);
-  app.use('/api', apiRouter);
-  app.use('/', router);
-
+export default function (app, io) {
+  app.use('/admin', adminRouter(io))
+  app.use('/api', apiRouter)
+  app.use('/', router)
 };

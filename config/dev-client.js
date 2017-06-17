@@ -1,8 +1,8 @@
-const hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true');
+const hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true')
 
 hotClient.subscribe(function (event) {
-  console.log(event);
+  console.log(event)
   if (event.action === 'reload') {
-    window.location.reload();
+    window.location.reload()
   }
-});
+})

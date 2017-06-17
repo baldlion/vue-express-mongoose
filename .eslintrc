@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "vue/jsx-uses-vars": 2
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
+}
