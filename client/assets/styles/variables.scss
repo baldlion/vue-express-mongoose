@@ -1,0 +1,25 @@
+// colors
+$color-porcelain: rgb(241, 243,	244) !default;
+$color-catskill-white: #eef3f6 !default;
+$color-pelorous: #46bdbd !default;
+
+$color-primary: $color-pelorous !default;
+
+$font-weight-normal: 300 !default;
+$font-weight-bold: 400 !default;
+
+
+// normalize-scss (https://github.com/JohnAlbin/normalize-scss)
+$base-font-size: 16px !default;
+$base-line-height: 24px !default;
+$base-unit: 'rem' !default;
+$base-font-family: 'Source Sans Pro', sans-serif !default;
+
+$h1-font-size: 2    * $base-font-size !default;
+$h2-font-size: 1.5  * $base-font-size !default;
+$h3-font-size: 1.17 * $base-font-size !default;
+$h4-font-size: 1    * $base-font-size !default;
+$h5-font-size: 0.83 * $base-font-size !default;
+$h6-font-size: 0.67 * $base-font-size !default;
+
+$normalize-vertical-rhythm: true !default;

@@ -3,7 +3,8 @@ import 'babel-polyfill'
 import { sync } from 'vuex-router-sync'
 import Admin from './Admin'
 import router from './router'
-import store from './store/admin.store'
+import store from './store'
+import './admin.scss'
 
 Vue.config.productionTip = false
 

@@ -1,0 +1,17 @@
+@import "variables";
+@import "fonts";
+@import "~normalize-scss";
+
+@include normalize();
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+}

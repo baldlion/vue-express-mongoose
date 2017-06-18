@@ -60,9 +60,7 @@ const webpackAppConfig = {
     extensions: ['.js', '.vue', '.json', '.scss'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, '..', 'client', 'app'),
-      '@@': path.resolve(__dirname, '..', 'client', 'admin'),
-      'shared': path.resolve(__dirname, '..', 'client', 'shared')
+      'assets': path.resolve('client/assets')
     }
   },
   plugins: env === 'production' ? [

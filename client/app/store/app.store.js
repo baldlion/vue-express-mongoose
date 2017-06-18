@@ -1,12 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+const state = {
+  title: 'App'
+}
 
-import app from './app.store.module'
+const getters = {
+  title: state => state.title
+}
 
-Vue.use(Vuex)
+const mutations = {}
 
-export default new Vuex.Store({
-  modules: {
-    app
-  }
-})
+const actions = {}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  mutations,
+  actions
+}

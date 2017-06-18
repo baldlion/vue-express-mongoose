@@ -66,8 +66,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~shared/styles/base";
-
   .auth {
     display: flex;
     align-items: center;
@@ -77,7 +75,7 @@
 
     input,
     input:-webkit-autofill {
-      width: 25vw;
+      width: 400px;
       padding: 1rem 2rem;
       font-size: 2rem;
       border: none;
@@ -88,7 +86,7 @@
     }
 
     button {
-      background: $color-primary;
+      background: #222222;
       box-shadow: none;
       border: none;
       padding: 1rem 2rem;
