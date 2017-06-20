@@ -52,6 +52,14 @@ exports.vueLoader = function () {
   }
 }
 
+exports.cssLoaders = function () {
+  return {
+    test: /\.css$/,
+    include: includePaths,
+    use: ['style-loader', cssLoader]
+  }
+}
+
 exports.scssLoaders = function () {
   return {
     test: /\.scss$/,

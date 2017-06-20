@@ -12,6 +12,7 @@ const env = process.env.NODE_ENV || 'development'
 const loaders = [
   utils.jsLoader(),
   utils.vueLoader(),
+  utils.cssLoaders(),
   utils.scssLoaders(),
   utils.urlLoader(),
   utils.svgLoader()
