@@ -12,8 +12,7 @@ export default function (app) {
     noInfo: true
   })
   const hotMiddleware = webpackHotMiddleware(compiler, {
-    log: false,
-    path: '/__webpack_hmr'
+    log: false
   })
 
   clear()

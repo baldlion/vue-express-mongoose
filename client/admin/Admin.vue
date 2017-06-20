@@ -1,6 +1,5 @@
 <template>
   <div class="admin">
-
     <header class="admin__header">
       {{title}} <a href="/admin/auth/logout">Logout</a>
     </header>

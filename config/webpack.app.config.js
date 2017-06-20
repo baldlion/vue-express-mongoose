@@ -9,10 +9,6 @@ const path = require('path')
 const utils = require('./utils')
 const env = process.env.NODE_ENV || 'development'
 
-const extractCss = new ExtractTextPlugin({
-  filename: 'css/[name].css'
-})
-
 const loaders = [
   utils.jsLoader(),
   utils.vueLoader(),
@@ -21,7 +17,60 @@ const loaders = [
   utils.svgLoader()
 ]
 
-const webpackAppConfig = {
+const vendor = [
+  'vue',
+  'vuex',
+  'vue-router',
+  'vuex-router-sync'
+]
+
+const definePlugin = new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: '"production"'
+  }
+})
+
+const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
+  cssProcessorOptions: {
+    safe: true
+  }
+})
+
+const extractCssPlugin = new ExtractTextPlugin({
+  filename: 'css/[name].css'
+})
+
+const hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin()
+
+const noEmitOnErrorsPlugin = new webpack.NoEmitOnErrorsPlugin()
+
+const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin()
+
+const commonChunksPluginApp = new webpack.optimize.CommonsChunkPlugin({
+  name: 'app-manifest',
+  chunks: ['app-vendor', 'app-manifest'],
+  minChunks: function (module) {
+    return module.context && module.context.indexOf('node_modules') !== -1
+  }
+})
+
+const commonChunksPluginAdmin = new webpack.optimize.CommonsChunkPlugin({
+  name: 'admin-manifest',
+  chunks: ['admin-vendor', 'admin-manifest'],
+  minChunks: function (module) {
+    return module.context && module.context.indexOf('node_modules') !== -1
+  }
+})
+
+const commonChunksPluginAuth = new webpack.optimize.CommonsChunkPlugin({
+  name: 'auth-manifest',
+  chunks: ['auth-vendor', 'auth-manifest'],
+  minChunks: function (module) {
+    return module.context && module.context.indexOf('node_modules') !== -1
+  }
+})
+
+const webpackConfig = {
   target: 'web',
   devtool: env === 'production' ? false : 'source-map',
   entry: {
@@ -30,25 +79,28 @@ const webpackAppConfig = {
     ] : [
       './client/app',
       'webpack/hot/dev-server',
-      'webpack-hot-middleware/client?path=/__webpack_hmr',
+      'webpack-hot-middleware/client',
       'eventsource-polyfill'
     ],
+    'app-vendor': vendor,
     admin: env === 'production' ? [
       './client/admin'
     ] : [
       './client/admin',
       'webpack/hot/dev-server',
-      'webpack-hot-middleware/client?path=/__webpack_hmr',
+      'webpack-hot-middleware/client',
       'eventsource-polyfill'
     ],
+    'admin-vendor': vendor,
     auth: env === 'production' ? [
       './client/admin/auth'
     ] : [
       './client/admin/auth',
       'webpack/hot/dev-server',
-      'webpack-hot-middleware/client?path=/__webpack_hmr',
+      'webpack-hot-middleware/client',
       'eventsource-polyfill'
-    ]
+    ],
+    'auth-vendor': vendor
   },
   output: {
     filename: 'js/[name].js',
@@ -63,71 +115,33 @@ const webpackAppConfig = {
       'assets': path.resolve('client/assets')
     }
   },
-  plugins: env === 'production' ? [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   chunks: ['app'],
-    //   minChunks: function (module, count) {
-    //     // any required modules inside node_modules are extracted to vendor
-    //     return (
-    //       module.resource &&
-    //       /\.js$/.test(module.resource) &&
-    //       module.resource.indexOf(
-    //         path.join(__dirname, '../node_modules')
-    //       ) === 0
-    //     )
-    //   }
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'admin-vendor',
-    //   chunks: ['admin'],
-    //   minChunks: function (module, count) {
-    //     // any required modules inside node_modules are extracted to vendor
-    //     return (
-    //       module.resource &&
-    //       /\.js$/.test(module.resource) &&
-    //       module.resource.indexOf(
-    //         path.join(__dirname, '../node_modules')
-    //       ) === 0
-    //     )
-    //   }
-    // }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   },
-    //   sourceMap: false
-    // }),
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    extractCss
-  ] : [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new FriendlyErrorsWebpackPlugin()
-  ],
   module: {
     loaders: process.env.LINT ? [
       utils.eslintLoader()
     ].concat(loaders) : loaders
-  }
+  },
+  plugins: env === 'production' ? [
+    definePlugin,
+    optimizeCssAssetsPlugin,
+    extractCssPlugin,
+    commonChunksPluginApp,
+    commonChunksPluginAdmin,
+    commonChunksPluginAuth
+  ] : [
+    hotModuleReplacementPlugin,
+    noEmitOnErrorsPlugin,
+    friendlyErrorsWebpackPlugin,
+    commonChunksPluginApp,
+    commonChunksPluginAdmin,
+    commonChunksPluginAuth
+  ]
 }
 
 // add hot-reload related code to entry chunks
 if (env === 'development') {
-  Object.keys(webpackAppConfig.entry).forEach(function (name) {
-    webpackAppConfig.entry[name] = ['./config/dev-client'].concat(webpackAppConfig.entry[name])
+  Object.keys(webpackConfig.entry).forEach(function (name) {
+    webpackConfig.entry[name] = ['./config/dev-client'].concat(webpackConfig.entry[name])
   })
 }
 
-module.exports = webpackAppConfig
+module.exports = webpackConfig
